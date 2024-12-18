@@ -26,7 +26,15 @@ router.post('/', (req: Request, res: Response) => {
 });
 
 // TODO: GET search history
-router.get('/history', async (req: Request, res: Response) => {});
+router.get('/history', async (req: Request, res: Response) => {
+  try {
+    const cities = await HistoryService.getCities();
+    res.json(cities);
+  } catch (error) {
+    console.error('Error fetching search history:', error);
+    res.status(500).json({message: 'Failed to fetch search history'});
+  }
+});
 
 // * BONUS TODO: DELETE city from search history
 router.delete('/history/:id', async (req: Request, res: Response) => {});
