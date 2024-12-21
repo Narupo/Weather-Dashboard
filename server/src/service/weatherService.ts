@@ -26,7 +26,7 @@ class WeatherService {
 
   constructor() {
     this.baseUrl = process.env.API_BASE_URL || '';
-    this.apiKey = process.env.API_KEY; || '';
+    this.apiKey = process.env.API_KEY || '';
     this.cityname = '';
   }
 
@@ -34,8 +34,8 @@ class WeatherService {
     this.cityname = city;
   }
   // TODO: Create fetchLocationData method
-  private async fetchLocationData(): Promise<any> {
-    const query = this.buildGeocodeQuery();
+  private async fetchLocationData(query: any): Promise<any> {
+    //const query = this.buildGeocodeQuery();
     const response = await fetch(query);
     if (!response.ok) {
       throw new Error('Failed to fetch location data');
@@ -103,10 +103,10 @@ class WeatherService {
       forecasts.push(forecast);
     });
     return forecasts;
-  } {}
+  } 
   // TODO: Complete getWeatherForCity method
   async getWeatherForCity(city: string): Promise<Weather[]> {
-    this.setcityname(city);
+    this.setCityName(city);
     const coordinates = await this.fetchAndDestructureLocationData();
     const response = await this.fetchWeatherData(coordinates);
     const currentWeather = this.parseCurrentWeather(response);
