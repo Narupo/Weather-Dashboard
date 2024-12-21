@@ -10,7 +10,7 @@ class City {
 class HistoryService {
   private historyPath: string;
   constructor() {
-    this.historyPath = path.join(process.cwd(), 'server/src/service/searchHistory.json');
+    this.historyPath = path.join(process.cwd(), 'db/searchHistory.json');
   }
   // TODO: Define a read method that reads from the searchHistory.json file
   private async read(): Promise<City[]> {
