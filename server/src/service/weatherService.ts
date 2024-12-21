@@ -35,7 +35,6 @@ class WeatherService {
   }
   // TODO: Create fetchLocationData method
   private async fetchLocationData(query: any): Promise<any> {
-    //const query = this.buildGeocodeQuery();
     const response = await fetch(query);
     if (!response.ok) {
       throw new Error('Failed to fetch location data');
@@ -51,12 +50,12 @@ class WeatherService {
   }
   // TODO: Create buildGeocodeQuery method
   private buildGeocodeQuery(): string {
-    return `${this.baseUrl}geocode?q=${this.cityname}&appid=${this.apiKey}`;
+    return `${this.baseUrl}geo/1.0/direct?q=${this.cityname}&appid=${this.apiKey}`;
   }
   // TODO: Create buildWeatherQuery method
   private buildWeatherQuery(coordinates: Coordinates): string {
     const { lat, lon } = coordinates;
-    return `${this.baseUrl}forecast?lat=${lat}&lon=${lon}&appid=${this.apiKey}&units=imperial`;
+    return `${this.baseUrl}data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${this.apiKey}&units=imperial`;
   }
   // TODO: Create fetchAndDestructureLocationData method
   private async fetchAndDestructureLocationData(): Promise<Coordinates> {
@@ -68,6 +67,7 @@ class WeatherService {
   // TODO: Create fetchWeatherData method
   private async fetchWeatherData(coordinates: Coordinates): Promise<any> {
     const query = this.buildWeatherQuery(coordinates);
+    console.log(query);
     const response = await fetch(query);
     if (!response.ok) {
       throw new Error('Failed to fetch weather data');
