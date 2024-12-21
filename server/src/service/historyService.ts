@@ -37,7 +37,7 @@ class HistoryService {
   // TODO Define an addCity method that adds a city to the searchHistory.json file
   async addCity(cityName: string): Promise<void> {
     const cities = await this.read();
-    if (cities.some((city) => city.name.toLowerCase( === cityName.toLowerCase()))) {
+    if (cities.some((city) => city.name.toLowerCase() === cityName.toLowerCase())) {
       console.warn('City already exists in search history');
       return;
   }
